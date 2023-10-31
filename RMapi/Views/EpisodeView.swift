@@ -9,9 +9,9 @@ import SwiftUI
 
 struct EpisodeListView: View {
     @State private var episodes: [Episode] = []
-
+    @State private var path = [Episode]()
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List(episodes) { episode in
                 NavigationLink(destination: CharacterListView(episodeId: episode.id)) {
                     Text(episode.name)
@@ -21,6 +21,7 @@ struct EpisodeListView: View {
         }
         .onAppear() {
             loadEpisodes()
+            path = episodes
         }
     }
     
