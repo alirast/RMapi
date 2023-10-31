@@ -9,11 +9,12 @@ import SwiftUI
 
 struct CharacterListView: View {
     let episodeId: Int
+    @Binding var path: NavigationPath
     @State private var characters: [Character] = []
     
     var body: some View {
         List(characters) { character in
-            NavigationLink(destination: CharacterDetailView(character: character)) {
+            NavigationLink(destination: CharacterDetailView(character: character, path: $path)) {
                 HStack {
                     Image(systemName: "person.crop.circle.fill")
                         .foregroundColor(.gray)

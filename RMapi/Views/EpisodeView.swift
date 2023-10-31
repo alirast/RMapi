@@ -9,11 +9,12 @@ import SwiftUI
 
 struct EpisodeListView: View {
     @State private var episodes: [Episode] = []
-    @State private var path = [Episode]()
+    //@State private var path = [Episode]()
+    @State private var path = NavigationPath()
     var body: some View {
         NavigationStack(path: $path) {
             List(episodes) { episode in
-                NavigationLink(destination: CharacterListView(episodeId: episode.id)) {
+                NavigationLink(destination: CharacterListView(episodeId: episode.id, path: $path)) {
                     Text(episode.name)
                 }
             }
@@ -21,8 +22,13 @@ struct EpisodeListView: View {
         }
         .onAppear() {
             loadEpisodes()
-            path = episodes
         }
+        
+        Button(action: {
+            print(path)
+        }, label: {
+            Text("pop to root")
+        })
     }
     
     func loadEpisodes() {

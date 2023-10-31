@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharacterDetailView: View {
     let character: Character
-    
+    @Binding var path: NavigationPath
     var body: some View {
         VStack {
             Text(character.location.name)
